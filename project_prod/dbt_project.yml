@@ -1,0 +1,40 @@
+name: 'project_prod'
+version: '1.0.0'
+
+# This setting configures which "profile" dbt uses for this project.
+profile: 'project_prod'
+
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:         # directories to be removed by `dbt clean`
+  - "target"
+  - "dbt_packages"
+
+
+models:
+  project_prod:
+    staging:
+      schema: stg
+      materialized: table
+      tags: ["staging"]
+    
+    intermediate:
+      schema: int
+      materialized: table
+      tags: ["intermediate"]
+    
+    marts:
+      schema: marts
+      materialized: table
+      tags: ["marts"]
+  
+  seeds:
+    project_prod:
+      schema: raw
+      tages: ["seeds"]
